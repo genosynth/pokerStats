@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Records from './components/Records';
+import ExtraInfo from './components/ExtraInfo'
 
 function App() {
 
@@ -57,11 +58,45 @@ function App() {
     return localData ? JSON.parse(localData) : [];
   });
 
+  const [styleLive] = useState(()=>{
+    if (live<0) {return {color:"red",fontSize:"50px"}}
+    if (live>0) {return {color:"green",fontSize:"50px"}}
+    return {color:"white", fontSize:"50px"}
+  })
+
+  const [styleOCG] = useState(()=>{
+    if (OCG<0) {return {color:"red",fontSize:"50px"}}
+    if (OCG>0) {return {color:"green",fontSize:"50px"}}
+    return {color:"white", fontSize:"50px"}
+  })
+
+  const [stylePokerSoftware] = useState(()=>{
+    if (pokerSoftware<0) {return {color:"red",fontSize:"50px"}}
+    if (pokerSoftware>0) {return {color:"green",fontSize:"50px"}}
+    return {color:"white", fontSize:"50px"}
+  })
+
+  const [styleAll] = useState(()=>{
+    if ((live+OCG+pokerSoftware)<0) {return {color:"red",fontSize:"50px"}}
+    if (live+OCG+pokerSoftware==0) {return {color:"white",fontSize:"50px"}}
+    return {color:"green", fontSize:"50px"}
+  })
+  
+  const [choice,setChoice] = useState()
+
+  const updateBoxShadow = (parameter) =>{
+    if (parameter<0)  return {boxShadow: "10px 5px 5px red"}
+    if (parameter>0)  return  {boxShadow: "10px 5px 5px green"}
+    else return {boxShadow: "10px 5px 5px white"}
+  }
+
+
+
   const saveEntry = () => {
     
 
     let record = {date, profitLoss,describtion,type}
-    setPokerRecords([...pokerRecords, record])
+    setPokerRecords([record,...pokerRecords])
     window.location.reload();
    
 
@@ -88,16 +123,29 @@ function App() {
     localStorage.setItem("my-poker-records", JSON.stringify(pokerRecords))
   }, [pokerRecords]);
 
+
   return (
     <div className="App">
       <header className="App-header">
       POKER STATSTICS
       </header>
       <div className="general-tab">
-        <header>Live {live} </header>
-        <header>Online Cash Games {OCG}</header>
-        <header>Poker Software {pokerSoftware}</header>
-        <header>Total {live + OCG + pokerSoftware}</header>
+        <div style={updateBoxShadow(live)} onClick={()=>setChoice("live")}>
+          <header >Live </header>
+          <span style={styleLive}>{live} </span>
+        </div>
+        <div style={updateBoxShadow(OCG)} onClick={()=>setChoice("ocg")}>
+          <header >Online Cash Games</header>
+          <span style={styleOCG}> {OCG}</span>
+        </div>
+        <div  style={updateBoxShadow(pokerSoftware)} onClick={()=>setChoice("poker-software")}>
+          <header >Poker Software</header>
+          <span style={stylePokerSoftware}>{pokerSoftware}</span>
+        </div>
+        <div  style={updateBoxShadow(live+OCG+pokerSoftware)} onClick={()=>setChoice("all")}>
+          <header>Total</header>
+          <span style={styleAll}> {live + OCG + pokerSoftware}</span>
+        </div>
       </div>
 
       <div className='record-tab'>     
@@ -110,7 +158,7 @@ function App() {
           <th>Describtion</th>              
         
         </tr>
-          <Records pokerRecords={pokerRecords}></Records>
+          <Records pokerRecords={pokerRecords} choice={choice}></Records>
         </table>     
       
       </div>
@@ -139,6 +187,7 @@ function App() {
 
       </form>
 
+      <ExtraInfo choice={choice} pokerRecords={pokerRecords} updateBoxShadow={updateBoxShadow}></ExtraInfo>
       
 
       

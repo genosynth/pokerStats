@@ -22,9 +22,20 @@
 }
 
 
+.entry-tab {
+  justify-content: center;
+  display: flex;
+  height: 40px;
+  padding: 2%;
+}
+
 .record-tab  {
   display: flex;
   justify-content: center ;
+  max-height: 400px;
+  overflow-y: scroll;
+  background-color: black;
+   
   
  
 }
@@ -35,6 +46,46 @@
 }
 
 
+
+table tr th {
+  color: white;
+}
+
+.record-tab table tr td {
+  color: white;
+}
+
+.general-tab {
+  display: flex;
+  justify-content: space-around;
+  padding-top:2% ;
+  padding-bottom:2%;
+  
+}
+
+.general-tab div {
+  border-radius: 5%;
+  width: 200px;
+  
+}
+
+.general-tab div:hover {
+  background-color: rgba(255, 255, 255, 0.336);
+  cursor: pointer;
+}
+
+.extra-info {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.extra-info div {
+  width: 25%;
+}
+
+header {
+color: white;
+}
 
 @keyframes App-logo-spin {
   from {
