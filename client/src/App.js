@@ -34,6 +34,22 @@ function App() {
      return value
     }
  })
+
+ const [headsUp] = useState(()=>{
+  if (localStorage.getItem("my-poker-records")){
+
+    let temp = JSON.parse(localStorage.getItem("my-poker-records"))
+    
+
+    temp = temp.filter((record) => record.type =="Heads Up");
+    //console.log(temp)
+    let value = 0
+    temp.forEach((element) => value = (value + parseInt(element.profitLoss)));
+    console.log(value)
+    return value
+   }
+ })
+
   const [pokerSoftware , setPokerSoftware] = useState(()=>{
     if (localStorage.getItem("my-poker-records")){
 
@@ -70,6 +86,14 @@ function App() {
     return {color:"white", fontSize:"50px"}
   })
 
+  const [styleheadsUp] = useState(()=>{
+    if (headsUp<0) {return {color:"red",fontSize:"50px"}}
+    if (headsUp>0) {return {color:"green",fontSize:"50px"}}
+    return {color:"white", fontSize:"50px"}
+  })
+
+
+
   const [stylePokerSoftware] = useState(()=>{
     if (pokerSoftware<0) {return {color:"red",fontSize:"50px"}}
     if (pokerSoftware>0) {return {color:"green",fontSize:"50px"}}
@@ -77,8 +101,8 @@ function App() {
   })
 
   const [styleAll] = useState(()=>{
-    if ((live+OCG+pokerSoftware)<0) {return {color:"red",fontSize:"50px"}}
-    if (live+OCG+pokerSoftware==0) {return {color:"white",fontSize:"50px"}}
+    if ((live+OCG+pokerSoftware+headsUp)<0) {return {color:"red",fontSize:"50px"}}
+    if (live+OCG+pokerSoftware+headsUp==0) {return {color:"white",fontSize:"50px"}}
     return {color:"green", fontSize:"50px"}
   })
   
@@ -103,7 +127,10 @@ function App() {
   }
 
   const handleDate = (event) =>{
-   setDate(event.target.value)
+    let date = new Date(event.target.value).toDateString()    // for alphanumerical date 
+   
+    setDate(date)
+  
   }
 
   const handleProfitLoss = (event) =>{
@@ -131,20 +158,24 @@ function App() {
       </header>
       <div className="general-tab">
         <div style={updateBoxShadow(live)} onClick={()=>setChoice("live")}>
-          <header >Live </header>
+          <header >Live Poker</header>
           <span style={styleLive}>{live} </span>
         </div>
         <div style={updateBoxShadow(OCG)} onClick={()=>setChoice("ocg")}>
           <header >Online Cash Games</header>
           <span style={styleOCG}> {OCG}</span>
         </div>
+        <div style={updateBoxShadow(headsUp)} onClick={()=>setChoice("heads-up")}>
+          <header >Heads Up</header>
+          <span style={styleheadsUp}> {headsUp}</span>
+        </div>
         <div  style={updateBoxShadow(pokerSoftware)} onClick={()=>setChoice("poker-software")}>
           <header >Poker Software</header>
           <span style={stylePokerSoftware}>{pokerSoftware}</span>
         </div>
-        <div  style={updateBoxShadow(live+OCG+pokerSoftware)} onClick={()=>setChoice("all")}>
+        <div  style={updateBoxShadow(live+OCG+pokerSoftware+headsUp)} onClick={()=>setChoice("all")}>
           <header>Total</header>
-          <span style={styleAll}> {live + OCG + pokerSoftware}</span>
+          <span style={styleAll}> {live + OCG + pokerSoftware + headsUp}</span>
         </div>
       </div>
 
@@ -176,7 +207,8 @@ function App() {
             <option value ="Live Tournament">Live Tournament</option>
             <option  value="Live Cash Game">Live Cash Game </option>
             <option value="Online Cash Game">Online Cash Game</option>
-            <option value="Poker Software">Poker Software</option>              
+            <option value="Poker Software">Poker Software</option>      
+            <option value="Heads Up">Heads Up</option>         
           
       </select>
 

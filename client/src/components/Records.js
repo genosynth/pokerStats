@@ -29,6 +29,19 @@ function Records({pokerRecords,choice}) {
     )
   }
 
+  if (choice=="heads-up") {   //filter pokerRecords with Heads Up Games only
+  
+    const filteredLive = pokerRecords.filter((record) => record.type == "Heads Up" );
+  return (
+    filteredLive.map(record => {
+
+      return <Record key={record.name} record={record}/>                      
+
+    })  
+    )
+  }
+
+
   if (choice=="poker-software") {  //filter pokerRecords with Poker Software only
    
     const filteredLive = pokerRecords.filter((record) => record.type == "Poker Software" );
