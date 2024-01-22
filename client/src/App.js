@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Records from './components/Records';
 import ExtraInfo from './components/ExtraInfo'
+import Details from './components/Details';
 
 function App() {
 
@@ -15,7 +16,7 @@ function App() {
       //console.log(temp)
       let value = 0
       temp.forEach((element) => value = (value + parseInt(element.profitLoss)));
-      console.log(value)
+      
       return value
      }
   })
@@ -30,7 +31,7 @@ function App() {
      //console.log(temp)
      let value = 0
      temp.forEach((element) => value = (value + parseInt(element.profitLoss)));
-     console.log(value)
+     
      return value
     }
  })
@@ -45,7 +46,7 @@ function App() {
     //console.log(temp)
     let value = 0
     temp.forEach((element) => value = (value + parseInt(element.profitLoss)));
-    console.log(value)
+    
     return value
    }
  })
@@ -60,7 +61,7 @@ function App() {
      //console.log(temp)
      let value = 0
      temp.forEach((element) => value = (value + parseInt(element.profitLoss)));
-     console.log(value)
+     
      return value
     }
  })
@@ -221,7 +222,12 @@ function App() {
 
       <ExtraInfo choice={choice} pokerRecords={pokerRecords} updateBoxShadow={updateBoxShadow}></ExtraInfo>
       
-
+      
+      <h1>Details</h1>
+      <div className='detail-box-container'>
+        <Details pokerRecords={pokerRecords}></Details>
+      </div>
+        
       
     </div>
   );

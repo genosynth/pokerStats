@@ -14,7 +14,7 @@ function ExtraInfo({choice,pokerRecords, updateBoxShadow}) {
       
         filteredLiveTournaments.forEach((element) => (temp=temp+parseInt(element.profitLoss)));
 
-       console.log(temp)
+       
         return temp
 
     })

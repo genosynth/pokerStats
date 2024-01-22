@@ -87,6 +87,23 @@ header {
 color: white;
 }
 
+.detail-box {
+  display: flex;
+  flex-direction: column;
+  color: whitesmoke;
+  width: fit-content;
+  padding: 2%;
+  min-width: 25%;
+  
+  
+}
+
+.detail-box-container {
+  display: flex;
+  overflow-x: scroll;
+  
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
