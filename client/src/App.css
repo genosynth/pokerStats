@@ -98,10 +98,37 @@ color: white;
   
 }
 
-.detail-box-container {
-  display: flex;
-  overflow-x: scroll;
+.detail-box-container table {
+ 
+
+margin-left: 25%;
+margin-right: 25%;
+padding: 2%;
+
   
+}
+
+
+.detail-box-container table tr th {
+
+  border-style: ridge ;
+  border-width: 1px;
+
+   
+}
+
+.detail-box-container table tr td {
+  color: white;
+}
+
+
+.title-details {
+  color: white;
+}
+
+.value-games {
+  color: yellow;
+ 
 }
 
 @keyframes App-logo-spin {

@@ -155,7 +155,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-      POKER STATSTICS
+      POKER STATISTICS
       </header>
       <div className="general-tab">
         <div style={updateBoxShadow(live)} onClick={()=>setChoice("live")}>
@@ -221,12 +221,13 @@ function App() {
       </form>
 
       <ExtraInfo choice={choice} pokerRecords={pokerRecords} updateBoxShadow={updateBoxShadow}></ExtraInfo>
+            
       
       
-      <h1>Details</h1>
-      <div className='detail-box-container'>
-        <Details pokerRecords={pokerRecords}></Details>
-      </div>
+       
+      <Details pokerRecords={pokerRecords}></Details>
+      
+      
         
       
     </div>
