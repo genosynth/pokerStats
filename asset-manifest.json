@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/pokerStats/static/css/main.369a60ab.css",
-    "main.js": "/pokerStats/static/js/main.5fdfd381.js",
+    "main.js": "/pokerStats/static/js/main.f712f84a.js",
     "static/js/787.d5fa4d18.chunk.js": "/pokerStats/static/js/787.d5fa4d18.chunk.js",
     "index.html": "/pokerStats/index.html",
     "main.369a60ab.css.map": "/pokerStats/static/css/main.369a60ab.css.map",
-    "main.5fdfd381.js.map": "/pokerStats/static/js/main.5fdfd381.js.map",
+    "main.f712f84a.js.map": "/pokerStats/static/js/main.f712f84a.js.map",
     "787.d5fa4d18.chunk.js.map": "/pokerStats/static/js/787.d5fa4d18.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.369a60ab.css",
-    "static/js/main.5fdfd381.js"
+    "static/js/main.f712f84a.js"
   ]
 }
