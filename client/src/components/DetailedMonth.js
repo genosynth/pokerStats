@@ -17,10 +17,11 @@ function DetailedMonth({month}) {
     if (totalProfit==0) return {color:"white"}
   })
 
-  const [styleRate,setStyleRate] = useState(()=>{
+  const [styleRateAll,setStyleRateAll] = useState(()=>{
 
     if (totalProfit/totalGames>0)return {color:"green"}
     if (totalProfit/totalGames<0)return {color:"red"}
+    if (totalProfit/totalGames===0) return {color:"white"}
   })
   
 
@@ -38,7 +39,18 @@ function DetailedMonth({month}) {
 
     if (rateOCG>0)return {color:"green"}
     if (rateOCG<0)return {color:"red"}
+    if (rateOCG===0)return {color:"white"}
+
   })
+
+  const [styleOCGProfit,setStyleOCGProfit] = useState(()=>{
+
+    if (profitOCG>0)return {color:"green"}
+    if (profitOCG<0)return {color:"red"}
+    if (profitOCG===0)return {color:"white"}
+
+  })
+
 
   const filteredLiveCashGames = month.records.filter((record) => record.type == "Live Cash Game" );
   const filteredLiveTournaments = month.records.filter((record) => record.type == "Live Tournament" );
@@ -56,6 +68,54 @@ function DetailedMonth({month}) {
   let rateLiveCashGames = Math.round(profitLiveCashGames/totalLiveCashGames)
   let rateLiveTournaments = Math.round(profitLiveTournaments/totalLiveTournaments)
 
+  const [styleLiveTournament] = useState(()=>{
+
+    if (profitLiveTournaments>0)return {color:"green"}
+    if (profitLiveTournaments<0)return {color:"red"}
+    else {return {color:"white"}}
+
+  })
+
+  const [styleLiveCashGames] = useState(()=>{
+
+    if (profitLiveCashGames>0)return {color:"green"}
+    if (profitLiveCashGames<0)return {color:"red"}
+    else {return {color:"white"}}
+
+  })
+
+  const [styleLiveProfit] = useState(()=>{
+
+    if (profitLiveTournaments+profitLiveCashGames>0)return {color:"green"}
+    if (profitLiveTournaments+profitLiveCashGames<0)return {color:"red"}
+    else {return {color:"white"}}
+
+  })
+
+  const [styleLiveTournamentRate] = useState(()=>{
+
+    if (profitLiveTournaments/totalLiveTournaments>0)return {color:"green"}
+    if (profitLiveTournaments/totalLiveTournaments<0)return {color:"red"}
+    else {return {color:"white"}}
+
+  })
+
+  const [styleLiveCashGamesRate] = useState(()=>{
+
+    if (profitLiveCashGames/totalLiveCashGames>0)return {color:"green"}
+    if (profitLiveCashGames/totalLiveCashGames<0)return {color:"red"}
+    else {return {color:"white"}}
+
+  })
+
+  const [styleLiveRate] = useState(()=>{
+
+    if (rateLive>0)return {color:"green"}
+    if (rateLive<0)return {color:"red"}
+    else {return {color:"white"}}
+
+  })
+
   const filteredHeadsUp = month.records.filter((record) => record.type == "Heads Up")
   let totalHeadsUp = filteredHeadsUp.length
   let profitHeadsUp = 0
@@ -63,11 +123,52 @@ function DetailedMonth({month}) {
     profitHeadsUp = profitHeadsUp + parseInt(record.profitLoss)
   })
 
+  const [styleHeadsUp] = useState(()=>{
+
+    if (profitHeadsUp>0)return {color:"green"}
+    if (profitHeadsUp<0)return {color:"red"}
+    else {return {color:"white"}}
+
+  })
+
+  const [styleHeadsUpRate] = useState(()=>{
+
+    if (profitHeadsUp/totalHeadsUp>0)return {color:"green"}
+    if (profitHeadsUp/totalHeadsUp<0)return {color:"red"}
+    else {return {color:"white"}}
+
+  })
+
+
+  const filteredPokerSoftware = month.records.filter((record) => record.type == "Poker Software" )
+  let profitPokerSoftware = 0
+  let totalPokerSoftware = filteredPokerSoftware.length
+  filteredPokerSoftware.forEach(record => {
+    profitPokerSoftware = profitPokerSoftware + parseInt(record.profitLoss)
+  })
+  let ratePokerSoftware = profitPokerSoftware/totalPokerSoftware
+
+  const [stylePokerSoftware] = useState(()=>{
+
+    if (profitPokerSoftware>0)return {color:"green"}
+    if (profitPokerSoftware<0)return {color:"red"}
+    else {return {color:"white"}}
+
+  })
+
+  const [stylePokerSoftwareRate] = useState(()=>{
+
+    if (ratePokerSoftware>0)return {color:"green"}
+    if (ratePokerSoftware<0)return {color:"red"}
+    else {return {color:"white"}}
+
+  })
+
   return (
     <div className='detail-box-container'>
      <table>
         <tr>
-          <th>{month.name}</th>          
+          <th className='month'>{month.name}</th>          
           <th>Live Poker</th>                
           <th>Live Tournaments</th>   
           <th>Live Cash Games</th>      
@@ -86,32 +187,32 @@ function DetailedMonth({month}) {
           <td className='value-games'>{totalLiveCashGames}</td>  
           <td className='value-games'>{totalOCGGames}</td>        
           <td className='value-games'>{totalHeadsUp}</td>   
-          <td className='value-games'>0</td>    
+          <td className='value-games'>{totalPokerSoftware}</td>    
           <td className='value-games'>{totalGames}</td>         
         
         </tr>
 
         <tr >
           <td className='title-details'>Rate</td>                
-          <td >{rateLive}€</td>                
-          <td >{rateLiveTournaments}€</td>
-          <td >{rateLiveCashGames}€</td>  
-          <td >{rateOCG}€</td>        
-          <td >{profitHeadsUp/totalHeadsUp}€</td>   
-          <td >0€</td>     
-          <td >{totalProfit/totalGames}€</td>          
+          <td style={styleLiveRate}>{rateLive}€</td>                
+          <td style={styleLiveTournamentRate}>{rateLiveTournaments}€</td>
+          <td style={styleLiveCashGamesRate}>{rateLiveCashGames}€</td>  
+          <td style={styleOCGRate}>{rateOCG}€</td>        
+          <td style={styleHeadsUpRate}>{(profitHeadsUp/totalHeadsUp).toFixed(2)}€</td>   
+          <td style={stylePokerSoftwareRate} >{ratePokerSoftware}€</td>     
+          <td style={styleRateAll}>{(totalProfit/totalGames).toFixed(2)}€</td>          
         
         </tr>
 
         <tr >
           <td className='title-details'>Profit/Loss</td>                
-          <td >{profitLiveCashGames+profitLiveTournaments}€</td>                
-          <td >{profitLiveTournaments}€</td>
-          <td >{profitLiveCashGames}€</td>  
-          <td >{profitOCG}€</td>        
-          <td >{profitHeadsUp}€</td>   
-          <td >0€</td>  
-          <td >{totalProfit}€</td>             
+          <td style={styleLiveProfit}>{profitLiveCashGames+profitLiveTournaments}€</td>                
+          <td style={styleLiveTournament}>{profitLiveTournaments}€</td>
+          <td style={styleLiveCashGames}>{profitLiveCashGames}€</td>  
+          <td style={styleOCGProfit}>{profitOCG}€</td>        
+          <td style={styleHeadsUp}>{profitHeadsUp}€</td>   
+          <td style={stylePokerSoftware}>{profitPokerSoftware}€</td>  
+          <td style={styleTotal}>{totalProfit}€</td>             
         
         </tr>
 

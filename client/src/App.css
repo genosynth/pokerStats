@@ -98,12 +98,17 @@ color: white;
   
 }
 
+.detail-box-container {
+  padding: 2%;
+}
+
 .detail-box-container table {
  
 
 margin-left: 25%;
 margin-right: 25%;
-padding: 2%;
+padding: 1%;
+border-style: ridge ;
 
   
 }
@@ -111,7 +116,8 @@ padding: 2%;
 
 .detail-box-container table tr th {
 
-  border-style: ridge ;
+  border-right: ridge;
+  border-bottom: ridge;
   border-width: 1px;
 
    
@@ -124,6 +130,7 @@ padding: 2%;
 
 .title-details {
   color: white;
+ 
 }
 
 .value-games {
@@ -131,11 +138,9 @@ padding: 2%;
  
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.month {
+  background-color: white;
+  color: #282c34;
+  opacity: 30%;
 }
